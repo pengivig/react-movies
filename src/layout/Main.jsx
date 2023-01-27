@@ -16,16 +16,24 @@ class Main extends React.Component {
 
    componentDidMount() {
       this.setState({ isLoading: true })
-      fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=iron_man`)
+      fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=iron_man`)
          .then(res => res.json())
-         .then(data => this.setState({ movies: data.Search, isLoading: false }));
+         .then(data => this.setState({ movies: data.Search, isLoading: false }))
+         .catch(err => {
+            console.error(err);
+            this.setState({isLoading: false})
+         });
    }
 
    searchMovie = (search, type) => {
       this.setState({ isLoading: true })
-      fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${search}&type=${type}`)
+      fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${search}&type=${type}`)
          .then(res => res.json())
-         .then(data => this.setState({ movies: data.Search, isLoading: false }));
+         .then(data => this.setState({ movies: data.Search, isLoading: false }))
+         .catch(err => {
+            console.error(err);
+            this.setState({isLoading: false})
+         });
 
    }
 
